@@ -179,13 +179,17 @@ def get_captcha_solver_usage() -> dict:
     return j
 
 # 从 Mailparser 获取 PIN
+import io 
+import pandas as pd
 def get_pin_from_mailparser(url_id: str) -> str:
-    # 从 Mailparser 获取 PIN# 
-    response = requests.get(
-        f"{MAILPARSER_DOWNLOAD_BASE_URL}{url_id}",
-    )
-    pin = response.json()[0]["pin"]
-    return pin
+    response = requests.get(f"https://files.mailparser.io/d/hkavywnk")
+    response.raise_for_status()
+    excel_data = pd.read_excel(io.BytesIO(response.content))
+    if "Pin" in excel_data.columns:
+        pin_value = str(excel_data["Pin"].iloc[0])
+        return pin_value.strip()
+    else:
+        raise ValueError("Excel 中未找到 'Pin' 列")
 
 # 登录函数
 @login_retry(max_retry=LOGIN_MAX_RETRY_COUNT)

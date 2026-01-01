@@ -17,20 +17,20 @@ import requests
 from bs4 import BeautifulSoup
 
 # 账户信息：用户名和密码
-USERNAME = os.getenv('wcgxizi@gmail.com')  # 填写用户名或邮箱
-PASSWORD = os.getenv('Wcg@980801')  # 填写密码
+USERNAME = os.getenv('EUSERV_USERNAME')  # 填写用户名或邮箱
+PASSWORD = os.getenv('EUSERV_PASSWORD')  # 填写密码
 
 # TrueCaptcha API 配置
 TRUECAPTCHA_USERID = os.getenv('TRUECAPTCHA_USERID')
 TRUECAPTCHA_APIKEY = os.getenv('TRUECAPTCHA_APIKEY')
 
 # Mailparser 配置
-MAILPARSER_DOWNLOAD_URL_ID = os.getenv('hkavywnk')
+MAILPARSER_DOWNLOAD_URL_ID = os.getenv('MAILPARSER_DOWNLOAD_URL_ID')
 MAILPARSER_DOWNLOAD_BASE_URL = "https://files.mailparser.io/d/"
 
 # Telegram Bot 推送配置
-TG_BOT_TOKEN = os.getenv('8406631775:AAG0V-iUVjDRrAcBVSJHuXynO0d6leebd74')
-TG_USER_ID = os.getenv('6234176297')
+TG_BOT_TOKEN = os.getenv('TG_BOT_TOKEN')
+TG_USER_ID = os.getenv('TG_USER_ID')
 TG_API_HOST = "https://api.telegram.org"
 
 # 代理设置（如果需要）

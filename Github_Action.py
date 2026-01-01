@@ -181,13 +181,16 @@ def get_captcha_solver_usage() -> dict:
 # 从 Mailparser 获取 PIN
 import io 
 import pandas as pd
+import os
+MAILPARSER_DOWNLOAD_URL_ID = os.getenv("MAILPARSER_DOWNLOAD_URL_ID")
+MAILPARSER_DOWNLOAD_BASE_URL = "https://files.mailparser.io/d/"
 def get_pin_from_mailparser(url_id: str) -> str:
-    response = requests.get(f"https://files.mailparser.io/d/hkavywnk")
+    download_url = f"{MAILPARSER_DOWNLOAD_BASE_URL}{url_id}"
+    response = requests.get(download_url)
     response.raise_for_status()
     excel_data = pd.read_excel(io.BytesIO(response.content))
     if "Pin" in excel_data.columns:
-        pin_value = str(excel_data["Pin"].iloc[0])
-        return pin_value.strip()
+        return str(excel_data["Pin"].iloc[0]).strip()
     else:
         raise ValueError("Excel 中未找到 'Pin' 列")
 
